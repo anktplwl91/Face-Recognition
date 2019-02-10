@@ -17,7 +17,7 @@ this purpose. This python script takes two inputs,
                       python face_recognition.py -n face_images -o people_dir_1 people_dir_2
 
 2. Having face images stored in the directory mentioned above, you can now run either *face_recog_contrastive.py* or 
-*face_recog_triplet.py* based on wheether Contrastive Loss or Triplet Loss is to be used to train the network. Both python scripts
+*face_recog_triplet.py* based on whether Contrastive Loss or Triplet Loss is to be used to train the network. Both python scripts
 takes same inputs, namely
 
     (i) *-b/--batch_size* represents the batch-size of inputs to be given to network, it defaults to 16.
@@ -37,3 +37,21 @@ takes same inputs, namely
     
                     python face_recog_contrastive.py -b 32 -d face_dirs -m resnet -o rmsprop -e 20
 
+3. To generate predictions from your trained and saved model, you can use *test_predictions.py*. This python script takes
+following input parameters
+
+    (i) *-d/--test_dir* represents the directory where you have test set of images saved. Keep in mind the directory structure
+    should be same as we created for training set, i.e. person-wise directories of images.
+    
+    (ii) *-t/--target_dir* represents directory where predicted results will be saved.
+    
+    (iii) *-m/--model_file* represents saved model file which will be used for making predictions.
+    
+    (iv) *-l/--loss* represents which model will be used, used to determine the model input, contrastive or triplet
+    
+    (v) *-n/--num_images* represents number of image pairs you want to test accuracy on
+    
+    Sample call is like
+    
+        python test_predictions.py -d test_dir -t results_dir -m contrastive_resnet_model.h5 -l contrastive -n 10
+            
